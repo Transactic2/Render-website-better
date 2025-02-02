@@ -1,229 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Render</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Arial', sans-serif;
-      }
-
-      body {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(135deg, #222, #444);
-        color: white;
-        overflow: hidden;
-      }
-
-      .snowflakes {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      .snowflake {
-        position: absolute;
-        top: -10px;
-        background-color: white;
-        border-radius: 50%;
-        opacity: 0.9;
-        animation: fall linear infinite;
-      }
-
-      @keyframes fall {
-        to {
-          transform: translateY(100vh) rotate(360deg);
-          opacity: 0;
-        }
-      }
-
-      .container {
-        text-align: center;
-        z-index: 2;
-        opacity: 0;
-        animation: fadeIn 1.5s ease-out forwards;
-        padding: 20px;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
         }
 
-        to {
-          opacity: 1;
-        }
-      }
-
-      img {
-        max-width: 70%;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-      }
-
-      h1 {
-        font-size: 2.5rem;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        margin-top: 15px;
-      }
-
-      .tabs {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        z-index: 2;
-      }
-
-      .tab {
-        background-color: #333;
-        color: white;
-        padding: 12px 25px;
-        font-size: 1rem;
-        cursor: pointer;
-        border-radius: 8px 8px 0 0;
-        transition: 0.3s;
-        margin: 0 10px;
-      }
-
-      .tab:hover,
-      .tab.active {
-        background-color: #555;
-        transform: scale(1.05);
-      }
-
-      .buttons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-top: 20px;
-      }
-
-      .button {
-        background-color: #444;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        font-size: 1.1rem;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: all 0.3s ease-in-out;
-      }
-
-      .button:hover {
-        background-color: #666;
-        transform: scale(1.1);
-      }
-
-      .content {
-        display: none;
-        text-align: center;
-        margin-top: 20px;
-      }
-
-      .content.active {
-        display: block;
-      }
-
-      .owner-panel {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 10px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        z-index: 2;
-      }
-
-      .owner-panel img {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-      }
-
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 2rem;
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #53354a);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            color: white;
+            overflow: hidden;
         }
 
-        .buttons {
-          flex-direction: column;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .button {
-          width: 100%;
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            width: 5px;
+            height: 5px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 2;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out forwards;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         img {
-          max-width: 60%;
+            max-width: 60%;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
-      }
+
+        h1 {
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            margin-top: 15px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            z-index: 2;
+        }
+
+        .tab {
+            background-color: rgba(50, 50, 50, 0.8);
+            color: white;
+            padding: 12px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            transition: 0.3s;
+            margin: 0 10px;
+        }
+
+        .tab:hover, .tab.active {
+            background-color: rgba(100, 100, 100, 0.9);
+            transform: scale(1.05);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .button:hover {
+            background-color: #777;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .owner-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .owner-panel img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            img {
+                max-width: 50%;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="snowflakes">
-      <div class="snowflake"></div>
-      <div class="snowflake"></div>
-      <div class="snowflake"></div>
-      <div class="snowflake"></div>
-      <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
     </div>
     <div class="tabs">
-      <div class="tab active" id="homeTab">Home</div>
-      <div class="tab" id="creditsTab">Credits</div>
+        <div class="tab active" id="homeTab">Home</div>
+        <div class="tab" id="creditsTab">Credits</div>
     </div>
     <div class="content active" id="homeContent">
-      <img src="exec.png" alt="Exec Image">
-      <div class="container">
-        <h1>Best API in Roblox. 93 unc 98 sunc</h1>
-      </div>
-      <div class="buttons">
-        <button class="button" id="downloadButton">Download</button>
-        <a href="https://discord.gg/8ee5yp7TTP" target="_blank">
-          <button class="button">Discord</button>
-        </a>
-      </div>
+        <img src="exec.png" alt="Exec Image">
+        <div class="container">
+            <h1>Best API in Roblox. 93 unc 98 sunc</h1>
+        </div>
+        <div class="buttons">
+            <button class="button" id="downloadButton">Download</button>
+            <a href="https://discord.gg/8ee5yp7TTP" target="_blank">
+                <button class="button">Discord</button>
+            </a>
+        </div>
     </div>
     <div class="content" id="creditsContent">
-      <div class="container">
-        <h1>Credits</h1>
-        <p>RenderAPI is made by <strong>luau.js</strong>, <strong>ch0rfla.alt (suspended)</strong>, and <strong>zack_nap on Discord</strong>. </p>
-      </div>
+        <div class="container">
+            <h1>Credits</h1>
+            <p>RenderAPI is made by <strong>luau.js</strong>, <strong>ch0rfla.alt (suspended)</strong>, and <strong>zack_nap on Discord</strong>.</p>
+        </div>
     </div>
     <div class="owner-panel">
-      <img src="Render.png" alt="Logo Image">
+        <img src="Render.png" alt="Logo Image">
     </div>
     <script>
-      const homeTab = document.getElementById('homeTab');
-      const creditsTab = document.getElementById('creditsTab');
-      const homeContent = document.getElementById('homeContent');
-      const creditsContent = document.getElementById('creditsContent');
-      const downloadButton = document.getElementById('downloadButton');
+        const homeTab = document.getElementById('homeTab');
+        const creditsTab = document.getElementById('creditsTab');
+        const homeContent = document.getElementById('homeContent');
+        const creditsContent = document.getElementById('creditsContent');
+        const downloadButton = document.getElementById('downloadButton');
 
-      function switchTab(activeTab, inactiveTab, activeContent, inactiveContent) {
-        activeTab.classList.add('active');
-        inactiveTab.classList.remove('active');
-        activeContent.classList.add('active');
-        inactiveContent.classList.remove('active');
-      }
-      homeTab.addEventListener('click', () => switchTab(homeTab, creditsTab, homeContent, creditsContent));
-      creditsTab.addEventListener('click', () => switchTab(creditsTab, homeTab, creditsContent, homeContent));
-      downloadButton.addEventListener('click', () => {
-        alert('Not released yet');
-      });
+        function switchTab(activeTab, inactiveTab, activeContent, inactiveContent) {
+            activeTab.classList.add('active');
+            inactiveTab.classList.remove('active');
+            activeContent.classList.add('active');
+            inactiveContent.classList.remove('active');
+        }
+        
+        homeTab.addEventListener('click', () => switchTab(homeTab, creditsTab, homeContent, creditsContent));
+        creditsTab.addEventListener('click', () => switchTab(creditsTab, homeTab, creditsContent, homeContent));
+
+        downloadButton.addEventListener('click', () => {
+            alert('Not released yet');
+        });
     </script>
-  </body>
+</body>
 </html>
